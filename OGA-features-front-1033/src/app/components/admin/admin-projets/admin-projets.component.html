@@ -1,0 +1,79 @@
+<div class="page">
+    <div class="container">
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(1)" style="width: calc(100% + 32px);" >
+                <mat-expansion-panel-header >
+                    <mat-panel-title >
+                        <span class="material-icons" style="margin-top: 16px;">
+                            add
+                        </span>
+                        <h3 style="margin-left:10px; font-size: larger; margin-top: 15px;">Ajouter un projet</h3>
+                    </mat-panel-title>
+                </mat-expansion-panel-header> 
+            
+                <h1 style="text-align: center;">
+                    Remplissez tous les champs
+                </h1>
+                <div class="container">
+                    <div style="display: flex; justify-content: space-between;">
+                        <mat-form-field appearance="fill" style="width: 48%;">
+                            <mat-label>Titre *</mat-label>
+                            <input matInput [(ngModel)]="titre">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" style="width: 48%;">
+                            <mat-label>Description *</mat-label>
+                            <input matInput [(ngModel)]="description">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <mat-form-field appearance="fill" style="width: 80%;">
+                    <mat-label>Précisez la date début du projet</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="dateDebut">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width:80%">
+                    <mat-label>Choisissez le chef du projet *</mat-label>
+                    <mat-select [formControl]="chefControl">
+                        <mat-option *ngFor="let chef of chefsDeProjets" [value]='chef' > {{chef.prenom+" "+chef.nom}} </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                  
+                <mat-action-row>
+                    <button mat-raised-button  color="primary" (click)='ajouterProjet()' >Ajouter un projet</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <br/>
+
+        <div class="grid-container">
+            <div class="grid-item" *ngFor="let projet of projets">
+                <a [routerLink]="['/admin/projet/'+projet.id]" style="text-decoration: none;">
+                    <div style=" padding: 4px; color:white; background-color:#3F51B5;  border-top-right-radius: 3px; border-top-left-radius: 3px;">
+                        <div style="font-weight: 500; text-align: left; margin-left: 8px; font-size: large;">{{projet.title}}</div>
+                        
+                        <div style="font-weight: 500; text-align: left; margin-left: 8px; margin-top: 5px; font-size: small;">{{projet.dateDebut}}</div>
+                    </div>
+                    <div>
+                        <p style="font-size: medium; padding: 5px; color: black;">
+                            {{projet.description}}
+                        </p>
+                        <mat-progress-bar 
+                            style="width: 80%; margin-left: 10%;"
+                            mode="determinate" 
+                            value="40">
+                        </mat-progress-bar>
+                        <button mat-button>
+                            Ouvrir le projet
+                        </button>
+                    </div>
+                </a>
+            </div> 
+        </div>
+    </div>
+
+    
+</div>

@@ -1,0 +1,58 @@
+<div class="page">
+    
+    <div class="container">
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel hideToggle [expanded]="step === 1" (opened)="setStep(1)" style="width: calc(100% + 32px);" >
+                <mat-expansion-panel-header >
+                    <mat-panel-title >
+                        <span class="material-icons" style="margin-top: 16px;">
+                            add
+                        </span>
+                        <h3 style="margin-left:10px; font-size: larger; margin-top: 15px;">Ajouter une nouvelle étude</h3>
+                    </mat-panel-title>
+                </mat-expansion-panel-header> 
+            
+                <h1 style="text-align: center;">
+                    Remplissez tous les champs
+                </h1>
+                <div class="container">
+                    <div style="display: flex; justify-content: space-between;">
+                        <mat-form-field appearance="fill" style="width: 45%;">
+                            <mat-label>Référence projet *</mat-label>
+                            <input matInput [(ngModel)]="reference">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" style="width: 45%;">
+                            <mat-label>Titre *</mat-label>
+                            <input matInput [(ngModel)]="titre">
+                        </mat-form-field>
+                    </div>
+                    <mat-form-field appearance="fill" style="width: 100%;">
+                        <mat-label>Description *</mat-label>
+                        <textarea matInput [(ngModel)]="description"></textarea>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="fill" style="width:100%">
+                        <mat-label>Appel d'offre *</mat-label>
+                        <mat-select [formControl]="appelDoffreControl">
+                            <ng-container *ngFor="let ao of appelsDoffres">
+                                <mat-option value={{ao.id}}> {{ao.reference}} </mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <div style="text-align: center;" >
+                        <h3>Ajouter le document de l'étude</h3>
+                        <p>
+                            <input type="file" (change)='onFileSelected($event)' accept=".pdf"/>
+                        </p>
+                    </div>
+                </div>
+                
+                
+                <mat-action-row>
+                    <button mat-raised-button  color="primary" (click)='creerEtude()' >Créer étude</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

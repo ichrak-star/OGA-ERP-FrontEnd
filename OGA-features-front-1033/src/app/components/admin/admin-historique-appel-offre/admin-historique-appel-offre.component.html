@@ -1,0 +1,30 @@
+<div class="page">
+    <mat-card class="container">
+        <h2>Historiques des appels d'offres</h2>
+        <br/>
+        <table style="width: 100%;">
+            <tr>
+                <th>Date création</th>
+                <th>Reference</th>
+                <th>Lien</th>
+                <th>Status</th>
+                <th> </th>
+            </tr>
+            <tr *ngFor="let ao of appelsOffres">
+                <td>{{ ao.datepost }}</td>
+                <td>{{ ao.reference }}</td>
+                <td>{{ ao.lienSite }}</td>
+                <td>
+                    <span *ngIf="ao.status == 1" >Validé</span >
+                    <span  *ngIf="ao.status == 2" >Réfusé</span >
+                    <span  *ngIf="ao.status == 0" >Attente</span >
+                </td>
+                <td>
+                    <button mat-button style=" padding:0%; color: cadetblue; " [routerLink]="['/admin/appel-offre/'+ao.id]">
+                        Consulter
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </mat-card>
+</div>

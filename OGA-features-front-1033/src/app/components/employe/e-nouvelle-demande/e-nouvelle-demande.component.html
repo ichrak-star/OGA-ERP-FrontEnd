@@ -1,0 +1,24 @@
+<div class="page">
+    <mat-card class="container">
+        <mat-card-header>
+            <mat-card-title>Créer Une Nouvelle Demande</mat-card-title>
+        </mat-card-header>
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="Demande de congé">
+                <app-e-nouvelle-demande-conge></app-e-nouvelle-demande-conge>
+            </mat-tab>
+            <mat-tab label="Demande d'attestation">
+                <app-e-nouvelle-demande-attestation></app-e-nouvelle-demande-attestation>
+            </mat-tab>
+            <mat-tab label="Demande d'avance">
+                <app-e-nouvelle-demande-avance></app-e-nouvelle-demande-avance>
+            </mat-tab>
+            <mat-tab label="Demande fiche de paie">
+                <app-e-nouvelle-demande-fiche-paie></app-e-nouvelle-demande-fiche-paie>
+            </mat-tab>
+            <mat-tab label="Autre demande">
+                <app-e-nouvelle-demande-autre></app-e-nouvelle-demande-autre>
+            </mat-tab>
+        </mat-tab-group>          
+    </mat-card>
+</div>

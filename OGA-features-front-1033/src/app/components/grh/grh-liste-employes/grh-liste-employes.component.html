@@ -1,0 +1,163 @@
+<div class="page">
+
+    <!-- Partie création des employés -->
+    <div class="container">
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(1)" style="width: calc(100% + 32px);" >
+                <mat-expansion-panel-header >
+                    <mat-panel-title >
+                        <span class="material-icons" style="margin-top: 16px;">
+                            person_add
+                        </span>
+                        <h3 style="margin-left:10px; font-size: larger; margin-top: 15px;">Ajouter un employé</h3>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+            
+                <h1 style="text-align: center;">
+                    Remplissez tous les champs
+                </h1>
+                <div class="container">
+                    <div class="g-a-row">
+                        <mat-form-field appearance="fill" class="g-a-in2">
+                            <mat-label>Nom *</mat-label>
+                            <input matInput [(ngModel)]="nom">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="g-a-in2">
+                            <mat-label>prenom *</mat-label>
+                            <input matInput [(ngModel)]="prenom">
+                        </mat-form-field>
+                    </div>
+                    <br/>
+                    <div class="g-a-row">
+                        <mat-form-field appearance="fill" class="g-a-in2">
+                            <mat-label>Email *</mat-label>
+                            <input matInput [(ngModel)]="email" >
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="g-a-in2">
+                            <mat-label>Numéro téléphone *</mat-label>
+                            <input matInput type="number" [(ngModel)]="telephone">
+                        </mat-form-field>
+                    </div>
+                    <br/>
+                    <mat-form-field appearance="fill" class="g-a-in1">
+                        <mat-label>Créer un mot de pass *</mat-label>
+                        <input matInput [(ngModel)]="motdepass">
+                    </mat-form-field>
+                    <br>
+                    <form class="example-container" [formGroup]="options" class="g-a-row">
+                        <mat-form-field appearance="fill" style="width:30%">
+                            <mat-label>Sex *</mat-label>
+                            <mat-select [formControl]="sexControl">
+                                <mat-option value="Male">Male</mat-option>
+                                <mat-option value="Femelle">Femelle</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" style="width:30%">
+                            <mat-label>Departement *</mat-label>
+                            <mat-select [formControl]="departementControl">
+                                    <mat-option value="It">It</mat-option>
+                                    <mat-option value="Administration">Administration</mat-option>
+                                    <mat-option value="Rh">Rh</mat-option>
+                                    <mat-option value="Commercial">Commercial</mat-option>
+                                    <mat-option value="Etude">Etude</mat-option>
+                                    <mat-option value="Comptabilite">Comptabilité</mat-option>
+                                    <mat-option value="Stock">Stock</mat-option>
+                            </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" style="width:30%">
+                            <mat-label>Role *</mat-label>
+                            <mat-select [formControl]="roleControl">
+                                <mat-option value="Employe">Employé</mat-option>
+                                <mat-option value="Agent">Agent</mat-option>
+                                <mat-option value="Chef de projet">Chef de projet</mat-option>
+                                <mat-option value="Responsable">Responsable</mat-option>
+                            </mat-select>
+                            </mat-form-field>
+                    </form>
+
+                    <div style="text-align: center; margin-top: 30px;" >
+                        <h3>Ajouter l'image de cin</h3>
+	                    <img  style="width: 220px; height: 110px;" [src]="cinUrl" *ngIf="cinUrl">
+                        <p>
+                            <input type="file" (change)='onFileSelected($event)' accept="image/*"/>
+                        </p>
+                    </div>
+                </div>
+                <mat-action-row>
+                    <button mat-raised-button  color="primary" (click)='creerEmploye()'>Créer un nouveau compte</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <!-- Partie consultation des employés-->
+    <mat-card class="container">
+
+        <div style="text-align: left; margin-bottom: 25px ;">
+            <h2>Liste des employés</h2>
+            <mat-slide-toggle labelPosition='before' color='primary' [(ngModel)]="toggleChecked"><b>Employées en cours de service:</b></mat-slide-toggle>
+        </div>
+        
+
+        <!-- TABLE -->
+        <table id="table-emplyes">
+            <thead>
+               <tr>
+                  <th></th>
+                  <th>Nom</th>
+                  <th>Email</th>
+                  <th>Tel.</th>
+                  <th>Département</th>
+                  <th></th>
+               </tr>
+            </thead>
+            <!-- Employes actifs -->
+            <tbody *ngIf="toggleChecked">
+               <tr *ngFor="let item of actifEmployes">
+                  <td>
+                    <img *ngIf="!item.profileImage" src='../../../../assets/default_profile.png' class="empImage" />
+                    <img *ngIf="item.profileImage" src={{item.profileImage}} class="empImage" />
+                  </td>
+                  <td><b>{{ item.prenom }} {{ item.nom }}</b></td>
+                  <td>{{ item.email }}</td>
+                  <td>{{ item.telephone}}</td>
+                  <td>{{ item.departement }}</td>
+                  <td>
+                    <!--openDialog-->
+                        <mat-icon 
+                            (click)='openDialog(item)'
+                            style="cursor: pointer;"
+                        >
+                            more_vert
+                        </mat-icon>
+                  </td>
+               </tr>
+            </tbody>
+            <!-- Employes non actifs -->
+            <tbody *ngIf="toggleChecked">
+                <tr *ngFor="let item of disabledEmployes">
+                   <td>
+                     <img *ngIf="!item.profileImage" src='../../../../assets/default_profile.png' class="empImage" />
+                     <img *ngIf="item.profileImage" src={{item.profileImage}} class="empImage" />
+                   </td>
+                   <td><b>{{ item.prenom }} {{ item.nom }}</b></td>
+                   <td>{{ item.email }}</td>
+                   <td>{{ item.telephone}}</td>
+                   <td>{{ item.departement }}</td>
+                   <td>
+                    <mat-icon 
+                        (click)='openDialog(item)'
+                        style="cursor: pointer;"
+                    >
+                        more_vert
+                    </mat-icon>
+                   </td>
+                </tr>
+             </tbody>
+         </table>
+
+        
+    </mat-card>
+</div>

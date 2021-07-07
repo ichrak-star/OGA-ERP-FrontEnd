@@ -1,0 +1,83 @@
+<div class="page">
+  <mat-card class="container">
+    <h1>Mes demandes</h1>
+    <p>
+      <mat-button-toggle-group 
+        #group="matButtonToggleGroup"
+        [value]="selectedVal"   
+      >
+      <mat-button-toggle-group  
+        appearance="legacy" 
+        name="fontStyle" 
+        aria-label="Font Style"
+        >
+        <mat-button-toggle value="tous" (click)="changeVal('tous')">Tous</mat-button-toggle>
+        <mat-button-toggle value="attente" (click)="changeVal('attente')">En attente</mat-button-toggle>
+        <mat-button-toggle value="accepté" (click)="changeVal('accepté')">Accepté</mat-button-toggle>
+      </mat-button-toggle-group>
+    </mat-button-toggle-group>
+    </p>
+    
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel *ngFor="let demande of demandesAAfficher"  [expanded]="step === 1">
+        <mat-expansion-panel-header>
+          <mat-panel-title >
+            Id Demande: {{demande.id}} ( 
+            <code *ngIf="demande.status === 0" style="color: rgb(223, 223, 5); font-size: medium;">
+              En attente
+            </code>
+            <code *ngIf="demande.status === 1" style="color: green; font-size: medium;">
+              Acceptée
+            </code>
+            <code *ngIf="demande.status === 2" style="color: red; font-size: medium;">
+              Refusée
+            </code>
+             ) 
+          </mat-panel-title>
+          <mat-panel-description>
+            Type: {{demande.type}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <!-- Content -->
+        <div>
+          <div *ngIf="demande.info" style="text-align: left; width: 100%;">
+            <h3 style="margin: 0%;">Info</h3>
+            <mat-form-field appearance="fill" style="width:100%">
+              <mat-label>{{demande.info}}</mat-label>
+              <input readonly aria-readonly="true" matInput>
+            </mat-form-field>
+          </div>
+          <div *ngIf="demande.raison" style="text-align: left; width: 100%;">
+            <h3 style="margin: 0%;">Raison</h3>
+            <mat-form-field appearance="fill" style="width:100%">
+              <mat-label>{{demande.raison}}</mat-label>
+              <textarea matInput readonly aria-readonly="true"></textarea>
+            </mat-form-field>
+          </div>
+          <div *ngIf="demande.commentaireEmploye" style="text-align: left; width: 100%;">
+            <h3 style="margin: 0%;">Commentaire de l'employé</h3>
+            <mat-form-field appearance="fill" style="width:100%">
+              <mat-label>{{demande.commentaireEmploye}}</mat-label>
+              <textarea matInput readonly aria-readonly="true"></textarea>
+            </mat-form-field>
+          </div>
+          <div *ngIf="demande.commentaireGrh" style="text-align: left; width: 100%;">
+            <hr>
+            <h3 style="margin: 0%;">Commentaire de l'agent Rh</h3>
+            <mat-form-field appearance="fill" style="width:100%">
+              <mat-label>{{demande.commentaireGrh}}</mat-label>
+              <textarea matInput readonly aria-readonly="true"></textarea>
+            </mat-form-field>
+          </div>
+
+          
+
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+    
+    
+
+  </mat-card>
+</div>

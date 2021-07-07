@@ -1,0 +1,16 @@
+<div class="page">
+    <mat-card class="container" style="text-align: left;">
+        <div style="display: flex; justify-content: space-between;">
+            <h2 style="margin: 0%;">ID: {{id}}</h2>
+            <h4 *ngIf="status === 0" style="background-color: rgb(216, 216, 67); color: white; padding: 3px; border-radius: 5px;">Attente</h4>
+            <h4 *ngIf="status === 1" style="background-color: rgb(127, 216, 67); color: white; padding: 3px; border-radius: 5px;">Validé</h4>
+            <h4 *ngIf="status === 2" style="background-color: rgb(216, 67, 67); color: white; padding: 3px; border-radius: 5px;">Refusé</h4>
+        </div>
+        <h2>Réference: {{reference}}</h2>
+        <h2>Description:</h2>
+        <p>{{description}}</p>
+        <br/>
+        <h3 style="margin: 0%;">Lien: <a [attr.href]="lienSite"  > {{lienSite}} </a></h3>
+        <h3>Date limite: {{dateFin}}</h3>
+    </mat-card>
+</div>

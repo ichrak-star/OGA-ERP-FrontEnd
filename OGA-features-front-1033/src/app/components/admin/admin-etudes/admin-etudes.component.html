@@ -1,0 +1,30 @@
+<div class="page">
+    <mat-card class="container">
+        <h2>Historiques des études</h2>
+        <br/>
+        <table style="width: 100%;">
+            <tr>
+                <th>Date création</th>
+                <th>Reference Projet</th>
+                <th>Titre</th>
+                <th>Status</th>
+                <th> </th>
+            </tr>
+            <tr *ngFor="let etude of etudes">
+                <td>{{ etude.datepost }}</td>
+                <td>{{ etude.referenceProjet }}</td>
+                <td>{{ etude.titre}}</td>
+                <td>
+                    <span *ngIf="etude.status == 1" >Validé</span >
+                    <span  *ngIf="etude.status == 2" >Réfusé</span >
+                    <span  *ngIf="etude.status == 0" >Attente</span >
+                </td>
+                <td>
+                    <button mat-button style=" padding:0%; color: cadetblue; " [routerLink]="['/admin/etude/'+etude.id]">
+                        Consulter
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </mat-card>
+</div>

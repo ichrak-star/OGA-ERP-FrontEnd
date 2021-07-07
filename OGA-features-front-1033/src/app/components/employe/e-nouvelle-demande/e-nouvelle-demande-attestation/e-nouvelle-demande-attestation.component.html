@@ -1,0 +1,17 @@
+<div class="container">
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Raison *</mat-label>
+        <textarea matInput [(ngModel)]="raison" ></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Commentaire *</mat-label>
+        <textarea matInput [(ngModel)]="commentaire"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)='creerDemande()'>
+        Créer
+    </button>
+
+</div>

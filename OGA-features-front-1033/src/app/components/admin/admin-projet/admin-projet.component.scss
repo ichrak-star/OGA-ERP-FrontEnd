@@ -1,0 +1,24 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+  }
+  
+  .grid-item {
+    background-color: rgb(255, 255, 255);
+    border-radius: 3px;
+    display: block;
+    font-size: 30px;
+    text-align: center;
+    margin: 20px;
+  }
+
+  .grid-item img{
+    border-radius: 50%;
+    width: 90px;
+  }
+
+  .grid-item p{
+    font-size: medium;
+    margin-bottom: 0%;
+  }

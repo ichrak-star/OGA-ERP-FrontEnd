@@ -1,0 +1,115 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false">
+      <mat-toolbar>
+        Projet ERP
+      </mat-toolbar>
+      <br/>
+      <mat-nav-list>
+        <h4 class="sidenav-list-title">Administrateur</h4>
+        <a mat-list-item routerLink="/admin/dashboard" class="elem" routerLinkActive="router-link-active">
+          <mat-icon>dashboard</mat-icon>
+          Dashboard
+        </a>
+
+        <a mat-list-item routerLink="/admin/employés" class="elem" routerLinkActive="router-link-active">
+          <mat-icon>people</mat-icon>
+          Employés
+        </a>
+        
+        <mat-divider></mat-divider>
+        
+        <br/>
+
+        <h4 class="sidenav-list-title">Documents</h4>
+
+        <a mat-list-item routerLink="/admin/demandes" class="elem" routerLinkActive="router-link-active">
+          <span class="material-icons">
+            description
+          </span>
+          Demandes
+        </a>
+
+        <a mat-list-item routerLink="/admin/historique-appels-offres" class="elem" routerLinkActive="router-link-active">
+            <span class="material-icons">grading</span>
+            Appels d'offres
+        </a>
+
+        <a mat-list-item routerLink="/admin/historique-etudes" class="elem" routerLinkActive="router-link-active">
+          <span class="material-icons">grading</span>
+          Etudes
+        </a>
+
+        <a mat-list-item routerLink="/admin/rapports-qualités" class="elem" routerLinkActive="router-link-active">
+          <span class="material-icons">grading</span>
+          Rapport de qualité
+        </a>
+
+        <mat-divider></mat-divider>
+
+          <h4 class="sidenav-list-title" style="margin-top: 8px;">Projets</h4>
+            <a mat-list-item routerLink="/admin/projets" class="elem" routerLinkActive="router-link-active">
+              <span class="material-icons">workt</span>
+              Projets
+            </a>
+
+        <mat-divider></mat-divider>
+        
+        
+          <h4 class="sidenav-list-title" style="margin-top: 8px;">Stock</h4>
+          <a mat-list-item routerLink="/admin/categories" class="elem" routerLinkActive="router-link-active">
+            <span class="material-icons">shopping_cart</span>
+            Stock
+          </a>
+
+        <mat-divider></mat-divider>
+        
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span>{{nom}} - Admin</span>
+  
+        <div style="text-align: end; margin-right: 25px; width: 100%;">
+          <button mat-icon-button [matMenuTriggerFor]="notifications">
+            <mat-icon matBadge="6" matBadgeColor="warn">notifications</mat-icon>
+          </button>
+          <mat-menu #notifications="matMenu">
+            <button mat-menu-item>
+              Vous avez 5 nouvelles demandes
+            </button>
+            <button mat-menu-item>
+              Une nouvelle appel d'offre a été ajoutée
+            </button>
+          </mat-menu>
+  
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>settings</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/admin/mon-profil']">
+              <mat-icon>account_circle</mat-icon>
+              <span>Mon profil</span>
+            </button>
+            <button mat-menu-item (click)='logout()'>
+              <mat-icon>power_settings_new</mat-icon>
+              <span>Se déconnecter</span>
+            </button>
+          </mat-menu>
+        </div>
+      </mat-toolbar>
+      <!-- Add Content Here -->
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

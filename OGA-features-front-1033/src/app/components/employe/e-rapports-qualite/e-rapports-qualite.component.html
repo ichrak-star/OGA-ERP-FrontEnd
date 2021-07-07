@@ -1,0 +1,83 @@
+<div class="page">
+
+    <div class="container">
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel hideToggle [expanded]="step === 0" (opened)="setStep(0)" style="width: calc(100% + 32px);" >
+                <mat-expansion-panel-header >
+                    <mat-panel-title >
+                        <span class="material-icons" style="margin-top: 16px;">
+                            add
+                        </span>
+                        <h3 style="margin-left:10px; font-size: larger; margin-top: 15px;">Ajouter un nouveau rapport de qualité</h3>
+                    </mat-panel-title>
+                </mat-expansion-panel-header> 
+            
+                <h1 style="text-align: center;">
+                    Remplissez tous les champs
+                </h1>
+                <div class="container">
+                    <div style="display: flex; justify-content: space-between;">
+                        <mat-form-field appearance="fill" style="width: 45%;">
+                            <mat-label>Référence projet *</mat-label>
+                            <input matInput [(ngModel)]="reference">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" style="width: 45%;">
+                            <mat-label>Titre *</mat-label>
+                            <input matInput [(ngModel)]="titre">
+                        </mat-form-field>
+                    </div>
+                    <mat-form-field appearance="fill" style="width: 100%;">
+                        <mat-label>Description *</mat-label>
+                        <textarea matInput [(ngModel)]="description"></textarea>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="fill" style="width:100%">
+                        <mat-label>Projet *</mat-label>
+                        <mat-select [formControl]="projetControl">
+                            <ng-container *ngFor="let p of projets">
+                                <mat-option value={{p.id}}> {{p.title}} </mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <div style="text-align: center;" >
+                        <h3>Ajouter le document du rapport</h3>
+                        <p>
+                            <input type="file" (change)='onFileSelected($event)' accept=".pdf"/>
+                        </p>
+                    </div>
+                </div>
+                <mat-action-row>
+                    <button mat-raised-button  color="primary" (click)='creerRapport()' >Ajouter Rapport</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+
+    <mat-card class="container">
+        <h2>Historiques des rapports de qualité</h2>
+        <br/>
+        <table style="width: 100%;">
+            <tr>
+                <th>Id</th>
+                <th>Reference Projet</th>
+                <th>Titre</th>
+                <th> </th>
+            </tr>
+            <tr *ngFor="let rapport of rapports">
+                <td>{{ rapport.id }}</td>
+                <td>{{ rapport.projectReference }}</td>
+                <td>{{ rapport.title}}</td>
+                <td>
+                    <button *ngIf="departement!=='Administration'" mat-button style=" padding:0%; color: cadetblue; " [routerLink]="['/employe/rapport-qualite/'+rapport.id]">
+                        Consulter
+                    </button>
+                    <button *ngIf="departement=='Administration'" mat-button style=" padding:0%; color: cadetblue; " [routerLink]="['/admin/rapport-qualite/'+rapport.id]">
+                        Consulter
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </mat-card>
+</div>

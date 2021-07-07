@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,qBAAqB,CAAA;EACjB,KAAK,EAAE,KAAK;EACZ,YAAY,EAAE,IAAI;CACrB;;AAED,AAAA,aAAa,CAAA;EACT,KAAK,EAAE,KAAK;EACZ,YAAY,EAAE,IAAI;EAClB,aAAa,EAAE,GAAG;CACrB",
+    "sources": [
+        "e-profil.component.scss"
+    ],
+    "names": [],
+    "file": "e-profil.component.css"
+}

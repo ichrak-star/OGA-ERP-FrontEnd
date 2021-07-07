@@ -1,0 +1,20 @@
+@import '~@angular/material/theming';
+$app-primary: mat-palette($mat-indigo);
+$primary: mat-color($app-primary);
+
+.landing{
+    background-color: $primary;
+    height: 100vh;
+}
+
+.content{
+    width: 28%;
+    margin-left: 34%;
+    top: 27%;
+    text-align: center;
+    padding: 50px;
+}
+
+.input{
+    width: 100%;
+}

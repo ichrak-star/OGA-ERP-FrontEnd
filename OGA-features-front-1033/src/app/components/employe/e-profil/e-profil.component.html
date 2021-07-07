@@ -1,0 +1,56 @@
+<div class="page">
+    <div class="container">
+        <mat-card>
+            <div style="display: flex;">
+                <img *ngIf="!employe.profileImage" src='../../../../assets/default_profile.png' alt='default image profil' class="default-image-profil" />
+                <img *ngIf="employe.profileImage" src={{employe.profileImage}} alt='image profil' class="image-profil" />
+                <div>
+                    <br/>
+                    <h3 style="text-align: left;margin: 0px;">
+                        {{employe.prenom}} {{employe.nom}} - {{employe.role}} en département {{employe.departement}}
+                    </h3>
+                    <h4 style="text-align: left;">
+                        Votre mot de pass
+                    </h4>
+                    <div style="width: 100%; display:flex;">
+                        <mat-form-field  style="width: 50%; padding: 0%;">
+                            <input [(ngModel)]="employe.password" matInput [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <br/>
+                        <button mat-button (click)='updatePassword()' color="primary" style="width: 50%; height: fit-content; margin-top: 18px;">Changer mot de pass</button>
+                    </div>
+                </div>
+            </div>
+
+            <button mat-button color="primary" *ngIf="!showUpdateImage" (click)='showUpdatePhoto()'>Changer l'image de profil</button>
+                    
+            <div style="text-align: center; margin-top: 30px;" *ngIf="showUpdateImage" >
+                <h3>Ajouter la nouvelle image de cin</h3>
+                <img *ngIf="imageUrl" style="width: 220px; height: 110px;" [src]="imageUrl">
+                <p>
+                    <input type="file" (change)='onFileSelected($event)' accept="image/*"/>
+                </p>
+                <button mat-button color="primary" (click)='updateProfileImage()'>Changer</button>
+            </div>
+        </mat-card>
+
+        <mat-card style="margin-top: 25px; margin-bottom: 25px;">
+            <h2 style="text-align: left;">Informations générales</h2>
+            <div style="display: flex; width: 20%; justify-content: space-between;">
+                <h3>Email:</h3>
+                <h4>{{employe.email}}</h4>
+            </div>
+            <div style="display: flex; width: 20%; justify-content: space-between;">
+                <h3>Tel:</h3>
+                <h4>{{employe.telephone}}</h4>
+            </div>
+        </mat-card>
+        <mat-card>
+            <h2 style="text-align: left;">Ma CIN</h2>
+            <img src={{employe.image}} alt='image cin' style="width: 300px; height: 150px;" />
+        </mat-card>
+    </div>
+</div>

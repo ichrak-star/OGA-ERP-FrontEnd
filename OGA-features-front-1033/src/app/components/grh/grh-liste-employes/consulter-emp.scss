@@ -1,0 +1,25 @@
+.header{
+    display: flex;
+    width: 100%;
+}
+
+.header h2, p{
+    margin: 0%;
+}
+
+.empImage{
+    width: 80px;
+    margin-right: 24px;
+    border-radius: 50%;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

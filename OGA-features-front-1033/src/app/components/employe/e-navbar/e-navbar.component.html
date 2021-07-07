@@ -1,0 +1,107 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>
+        Projet ERP
+    </mat-toolbar>
+    <br/>
+    <mat-nav-list>
+      <h4 class="sidenav-list-title">Demandes</h4>
+      <a mat-list-item routerLink="/employe/nouvelle-demande" class="elem" routerLinkActive="router-link-active">
+        <mat-icon>note_add</mat-icon>
+        Créer Demande
+      </a>
+      <a mat-list-item routerLink="/employe/historique-demandes" class="elem" routerLinkActive="router-link-active">
+        <span class="material-icons">
+          move_to_inbox
+        </span>
+        Historique Demandes
+      </a>
+      <mat-divider></mat-divider>
+      <h4 class="sidenav-list-title">Mon Calendrier</h4>
+      <a mat-list-item routerLink="/employe/mon-calendrier" class="elem" routerLinkActive="router-link-active">
+        <mat-icon>date_range</mat-icon>
+        Calendrier
+      </a>
+      <mat-divider></mat-divider>
+      <ng-container *ngIf="departement === 'Commercial'">
+        <h4 class="sidenav-list-title" style="margin-top: 8px;">Appels d'offres</h4>
+        <a mat-list-item routerLink="/employe/nouvelle-appel-offre" class="elem" routerLinkActive="router-link-active">
+          <span class="material-icons">post_add</span>
+          Ajouter appel d'offre
+        </a>
+        <a mat-list-item routerLink="/employe/historique-appels-offres" class="elem" routerLinkActive="router-link-active"> 
+          <span class="material-icons">grading</span>
+          Historiques
+        </a>
+      </ng-container>
+      <ng-container *ngIf="departement === 'Etude'">
+        <h4 class="sidenav-list-title" style="margin-top: 8px;">Etudes</h4>
+        <a mat-list-item routerLink="/employe/nouvelle-etude" class="elem" routerLinkActive="router-link-active">
+          <span class="material-icons">post_add</span>
+          Ajouter une étude
+        </a>
+        <a mat-list-item routerLink="/employe/historique-etudes" class="elem" routerLinkActive="router-link-active">
+          <span class="material-icons">grading</span>
+          Historiques
+        </a>
+        <a mat-list-item routerLink="/employe/rapports-qualités" class="elem" routerLinkActive="router-link-active">
+          <span class="material-icons">grading</span>
+          Rapport de qualité
+        </a>
+      </ng-container>
+      <ng-container *ngIf="departement === 'Stock'">
+        <h4 class="sidenav-list-title" style="margin-top: 8px;">Stock</h4>
+        <a mat-list-item routerLink="/employe/categories" class="elem" routerLinkActive="router-link-active">
+          <span class="material-icons">shopping_cart</span>
+          Stock
+        </a>
+        <mat-divider></mat-divider>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>{{nom}} - {{departement}}</span>
+      <div style="text-align: end; margin-right: 25px; width: 100%;">
+        <button mat-icon-button [matMenuTriggerFor]="notifications">
+          <mat-icon matBadge="2" matBadgeColor="warn">notifications</mat-icon>
+        </button> 
+        <mat-menu #notifications="matMenu">
+          <button mat-menu-item>
+            Votre demande: 3 a été accepté 
+          </button>
+          <button mat-menu-item>
+            Votre demande: 4 a été refusé
+          </button>
+        </mat-menu>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>settings</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="['/employe/mon-profil']">
+            <mat-icon>account_circle</mat-icon>
+            <span>Mon profil</span>
+          </button>
+          <button mat-menu-item (click)='logout()'>
+            <mat-icon>power_settings_new</mat-icon>
+            <span>Se déconnecter</span>
+          </button>
+        </mat-menu>
+      </div>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

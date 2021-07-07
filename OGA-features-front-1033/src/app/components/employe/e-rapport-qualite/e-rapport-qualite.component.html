@@ -1,0 +1,44 @@
+<div class="page" *ngIf="rapportExist">
+    <mat-card class="container" style="text-align: left;">
+        <h4>Pour le projet: {{projecttitle}}</h4>
+        <br/>
+        <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Référence</mat-label>
+            <input [(ngModel)]="reference" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Titre</mat-label>
+            <input [(ngModel)]="titre" matInput >
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Description</mat-label>
+            <textarea [(ngModel)]="description" matInput ></textarea>
+        </mat-form-field>
+        <br/>
+        <h4 *ngIf="departement==='Etude'">
+            crée par: {{creator}} 
+        </h4>
+        <h4 *ngIf="departement==='Administration'">
+            <button mat-button style=" padding:0%; color: cadetblue;" [routerLink]="['/admin/employe/'+creatorId]">
+                crée par: {{creator}} 
+            </button>
+        </h4>
+        <div style="text-align: center;">
+            <a href={{lienDocumet}} target="_blank" rel="noreferrer">
+                <button mat-button style=" padding:0%; color: cadetblue; ">
+                    Télécharger rapport de qualité
+                </button>
+            </a>
+        </div>
+        <div style="width: 100%; text-align: right; margin-top: 25px;">
+            <button mat-flat-button color="primary" (click)='update()'>Mettre à jour</button>
+            <button mat-flat-button color="warn" style="margin-left: 15px;" *ngIf="departement=='Administration'" (click)='supprimer()' >Supprimer</button>
+        </div>
+    </mat-card>
+</div>
+
+<div class="page" *ngIf="!rapportExist">
+    <mat-card class="container">
+        Aucun rapport avec l'id {{id}}
+    </mat-card>
+</div>

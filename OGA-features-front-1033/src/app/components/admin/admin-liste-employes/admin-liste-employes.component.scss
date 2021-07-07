@@ -1,0 +1,52 @@
+@import '~@angular/material/theming';
+$app-primary: mat-palette($mat-indigo);
+$primary: mat-color($app-primary);
+
+.g-a-row{
+    display:flex;
+    justify-content: space-between;
+    height: 50px;
+}
+
+.g-a-in1{
+    width: 100%;
+}
+
+.g-a-in2{
+    width: 48%;
+}
+
+// Tbale des employés :
+#table-emplyes {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+#table-emplyes td, #table-emplyes th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+#table-emplyes tr:nth-child(even){background-color: #f2f2f2;}
+  
+#table-emplyes tr:hover {background-color: #ddd;}
+  
+#table-emplyes th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: $primary;
+    color: white;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .g-a-row{
+        display: block;
+    }
+    .g-a-in2{
+        width: 100%;
+    }
+}

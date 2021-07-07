@@ -1,0 +1,139 @@
+<div class="page" *ngIf="!deleted">
+    <div class="container">
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" style="width: calc(100% + 32px);" >
+                <mat-expansion-panel-header >
+                    <mat-panel-title >
+                        <span class="material-icons" style="margin-top: 16px;">
+                            settings
+                        </span>
+                        <h3 style="margin-left:10px; font-size: larger; margin-top: 15px;">Mettre à jour</h3>
+                    </mat-panel-title>
+                </mat-expansion-panel-header> 
+                <div class="container">
+                    <div style="display: flex; width: 100%; justify-content: space-between;">
+                        <mat-form-field appearance="fill" style="width: 48%;">
+                            <mat-label>Titre</mat-label>
+                            <input matInput [(ngModel)]="name">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" style="width: 48%;">
+                            <mat-label>Description</mat-label>
+                            <input matInput [(ngModel)]="description">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-action-row>
+                    <button 
+                        mat-raised-button  
+                        color="primary" 
+                        (click)='updateCategorie()'
+                        >
+                        Mettre à jour categorie
+                    </button>
+
+                    <button
+                        mat-raised-button  
+                        color="primary" 
+                        (click)='deleteCategorie(id)'
+                        style="background-color: rgb(230, 46, 46);"
+                        >
+                        Supprimer
+                    </button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <div class="container">
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(1)" style="width: calc(100% + 32px);" >
+                <mat-expansion-panel-header >
+                    <mat-panel-title >
+                        <span class="material-icons" style="margin-top: 16px;">
+                            add
+                        </span>
+                        <h3 style="margin-left:10px; font-size: larger; margin-top: 15px;">Ajouter un produit</h3>
+                    </mat-panel-title>
+                </mat-expansion-panel-header> 
+            
+                <h2 style="text-align: center;">
+                    Remplissez tous les champs
+                </h2>
+                <div class="container">
+                    <div style="display: flex; width: 100%; justify-content: space-between;">
+                        <mat-form-field appearance="fill" style="width: 48%;">
+                            <mat-label>Nom *</mat-label>
+                            <input matInput [(ngModel)]="title">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" style="width: 48%;">
+                            <mat-label>Description *</mat-label>
+                            <input matInput [(ngModel)]="descriptionProduct">
+                        </mat-form-field>
+                    </div>
+                    <div style="display: flex; width: 100%; justify-content: space-between;">
+                        <mat-form-field appearance="fill" style="width: 30%;">
+                            <mat-label>Weight *</mat-label>
+                            <input matInput [(ngModel)]="weight">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" style="width: 30%;">
+                            <mat-label>price *</mat-label>
+                            <input matInput [(ngModel)]="price">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" style="width: 30%;">
+                            <mat-label>Quantity *</mat-label>
+                            <input matInput [(ngModel)]="quantity">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-action-row>
+                    <button mat-raised-button  color="primary" (click)='creerProduit()' >Ajouter un produit</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+     <!-- Partie consultation des produits-->
+     <mat-card class="container">
+        <div style="text-align: left; margin-bottom: 25px ;">
+            <h2>Liste des produits de la categorie {{name}}</h2>
+        </div>
+        <!-- TABLE -->
+        <table id="table-emplyes" style="width: 100%;">
+            <thead>
+               <tr>
+                  <th>Titre</th>
+                  <th>Description</th>
+                  <th>poids</th>
+                  <th>Prix</th>
+                  <th>Quantité</th>
+                  <th></th>
+               </tr>
+            </thead>
+            <tbody >
+               <tr *ngFor="let item of products">
+                  
+                  <td>{{ item.title }}</td>
+                  <td>{{ item.description }}</td>
+                  <td>{{ item.weight }}</td>
+                  <td>{{ item.price}}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>
+                    <button mat-button style=" padding:0%; color: cadetblue; " [routerLink]="['/employe/categorie/'+id+'/produit/'+item.id]" >
+                        Editer
+                    </button>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+    </mat-card>
+</div>
+
+<div class="page" ng *ngIf="deleted">
+    <mat-card class="container">
+        <h3 style="color:rgb(233, 61, 61)"><b>Erreur</b></h3>
+        Cette categorie a été supprimée ou n'existe pas
+        <br/>
+        <button mat-button style=" padding:0%; color: cadetblue; " [routerLink]="['/employe/categories']">
+            Aller au stock
+        </button>
+    </mat-card>
+</div>

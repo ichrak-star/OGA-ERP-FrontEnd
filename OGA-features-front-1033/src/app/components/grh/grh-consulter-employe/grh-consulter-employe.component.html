@@ -1,0 +1,130 @@
+
+<div class="page">
+    <div *ngIf="!employe">
+        Utlisateur {{id}} inexistant
+    </div>
+    <div *ngIf="employe">
+        <mat-card class="container">
+            <h2 style="text-align: start; margin: 0%;">Info. Employé : id {{employe.id}}</h2>
+            <h3 style="text-align: start;">
+                Statut :
+                <span *ngIf="employe.disabled" style="padding: 3px; border-radius: 5px; background-color: rgba(253, 38, 9, 0.685);">
+                    Inactif
+                </span>
+                <code *ngIf="!employe.disabled" style="padding: 3px; border-radius: 5px; background-color: rgba(31, 197, 31, 0.685);">
+                    Actif
+                </code>
+            </h3>
+            <div class="container">
+                <div class="g-a-row">
+                    <mat-form-field appearance="fill" class="g-a-in2">
+                        <mat-label>Nom</mat-label>
+                        <input matInput [(ngModel)]="nom">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="g-a-in2">
+                        <mat-label>prenom</mat-label>
+                        <input matInput [(ngModel)]="prenom">
+                    </mat-form-field>
+                </div>
+                <br/>
+                <div class="g-a-row">
+                    <mat-form-field appearance="fill" class="g-a-in2">
+                        <mat-label>Email</mat-label>
+                        <input matInput [(ngModel)]="email" >
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="g-a-in2">
+                        <mat-label>Numéro téléphone</mat-label>
+                        <input matInput type="number" [(ngModel)]="telephone">
+                    </mat-form-field>
+                </div>
+                <br/>
+                <mat-form-field appearance="fill" class="g-a-in1">
+                    <mat-label>Mot de pass</mat-label>
+                    <input [(ngModel)]="motdepass" matInput [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <br>
+                <form class="example-container" [formGroup]="options" class="g-a-row">
+                    <mat-form-field appearance="fill" style="width:30%">
+                        <mat-label>Sex *</mat-label>
+                        <mat-select [formControl]="sexControl">
+                            <mat-option value="Male">Male</mat-option>
+                            <mat-option value="Femelle">Femelle</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" style="width:30%">
+                        <mat-label>Departement *</mat-label>
+                        <mat-select [formControl]="departementControl">
+                                <mat-option value="It">It</mat-option>
+                                <mat-option value="Administration">Administration</mat-option>
+                                <mat-option value="Rh">Rh</mat-option>
+                                <mat-option value="Commercial">Commercial</mat-option>
+                                <mat-option value="Etude">Etude</mat-option>
+                                <mat-option value="Stock">Stock</mat-option>
+                                <mat-option value="Comptabilite">Comptabilité</mat-option>
+                        </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" style="width:30%">
+                        <mat-label>Role *</mat-label>
+                        <mat-select [formControl]="roleControl">
+                            <mat-option value="Employe">Employé</mat-option>
+                            <mat-option value="Agent">Agent</mat-option>
+                            <mat-option value="Responsable">Responsable</mat-option>
+                        </mat-select>
+                        </mat-form-field>
+                    </form>
+                    <br/>
+                    <div *ngIf="!showUpdateImage">
+                        <h3>CIN de l'employé</h3>
+                        <img 
+                            src = {{imageUri}} 
+                            style="width: 400px; height: 190px; margin: 25px;"
+                        >
+                        <button mat-button color="primary" (click)='showUpdateCin()'>Changer l'image de cin</button>
+                    </div>
+                    <div style="text-align: center; margin-top: 30px;" *ngIf="showUpdateImage" >
+                        <h3>Ajouter la nouvelle image de cin</h3>
+	                    <img *ngIf="cinUrl" style="width: 220px; height: 110px;" [src]="cinUrl">
+                        <p>
+                            <input type="file" (change)='onFileSelected($event)' accept="image/*"/>
+                        </p>
+                        <button mat-button color="primary" (click)='showUpdateCin()'>Annuler</button>
+                    </div>
+                    <br/>
+                    <mat-action-row>
+                        <button 
+                            mat-raised-button  
+                            color="primary" 
+                            (click)='updateEmploye()'
+                            >
+                            Mettre à jour employé
+                        </button>
+
+                        <button
+                            *ngIf="!employe.disabled"
+                            mat-raised-button 
+                            color="warn" 
+                            style="margin-left: 20px;"
+                            (click)='disableEmploye(employe.id)'
+                            >
+                            Rendre inactif
+                        </button>
+                    </mat-action-row>
+            </div>
+        </mat-card>
+
+        <!-- TODO: ajouter calendrier employé -->
+        <mat-card class="container">
+            <h2 style="text-align: start;">Calendrier Employé</h2>
+            <p *ngIf="employe.disabled">L'employé {{id}} est inactif</p>
+            <div *ngIf="!employe.disabled">
+                Calendrier de l'employe num {{id}}
+                <mat-calendar style="width:60%; margin-left: 20%;"></mat-calendar>
+            </div>
+        </mat-card>
+    </div>
+</div>

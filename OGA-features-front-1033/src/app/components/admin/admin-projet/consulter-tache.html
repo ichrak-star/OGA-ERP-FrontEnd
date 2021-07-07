@@ -1,0 +1,31 @@
+<mat-dialog-content>
+    
+    <h2> {{tache.titre}}</h2>
+
+    <h5> {{tache.description}} </h5>
+
+
+        <h3 style="text-align: left;" >Employés affectés</h3>
+            <div class="grid-container">
+                <div class="grid-item" *ngFor="let emp of tache.users">
+                    <img *ngIf="emp.profileImage" src={{emp.profileImage}} style='width:50px' />
+                    <img *ngIf="!emp.profileImage" src="../../../../assets/default_profile.png" style='width:50px' />
+                    <p>{{emp.prenom + ' ' + emp.nom}}</p>
+                    <button mat-button style="color: red;">Delete</button>
+                </div>
+
+            </div>
+
+    <mat-form-field appearance="fill" style="width:100%">
+        <mat-label>Ajouter un employer *</mat-label>
+        <mat-select [formControl]="employerAAjouter">
+            <mat-option *ngFor="let emp of employesNonAffectes" [value]='emp' > {{emp.prenom+" "+emp.nom}} </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-button color='primary' (click)='ajouterEmplyeAuTache()'>Ajouter</button>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Fermer</button>
+</mat-dialog-actions>

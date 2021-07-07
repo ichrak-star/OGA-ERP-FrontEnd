@@ -1,0 +1,62 @@
+<div class="page" ng *ngIf="!deleted">
+        <mat-card class="container">
+            <h2 style="text-align: start; margin: 0%;">Categorie: {{categorieName}}</h2>
+            <div class="container">
+                <div style="width: 100%; display: flex; justify-content: space-between;">
+                    <mat-form-field appearance="fill" style="width: 48%;">
+                        <mat-label>Nom *</mat-label>
+                        <input matInput [(ngModel)]="title">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" style="width: 48%;">
+                        <mat-label>Description *</mat-label>
+                        <input matInput [(ngModel)]="descriptionProduct">
+                    </mat-form-field>
+                </div>
+                <div style="width: 100%; display: flex; justify-content: space-between;">
+                    <mat-form-field appearance="fill" style="width: 30%;">
+                        <mat-label>Weight *</mat-label>
+                        <input matInput [(ngModel)]="weight">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" style="width: 30%;">
+                        <mat-label>price *</mat-label>
+                        <input matInput [(ngModel)]="price">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" style="width: 30%;">
+                        <mat-label>Quantity *</mat-label>
+                        <input matInput [(ngModel)]="quantity">
+                    </mat-form-field>
+                </div>
+                <br/>
+                <mat-action-row>
+                    <div style="text-align: right;">
+                    <button 
+                        mat-raised-button  
+                        color="primary" 
+                        (click)='updateProduit()'
+                        >
+                        Mettre à jour produit
+                    </button>
+
+                    <button
+                        mat-raised-button 
+                        (click)='deleteProduit(idCategorie,id)'
+                        style="background-color: rgb(233, 61, 61); margin-left: 15px; color:white"
+                        >
+                        Supprimer
+                    </button>
+                </div>
+                </mat-action-row>
+            </div>
+        </mat-card>
+</div>
+
+<div class="page" ng *ngIf="deleted">
+    <mat-card class="container">
+        <h3 style="color:rgb(233, 61, 61)"><b>Erreur</b></h3>
+        Ce produit a été supprimé ou n'existe pas
+        <br/>
+        <button mat-button style=" padding:0%; color: cadetblue; " [routerLink]="['/employe/categories']">
+            Aller au stock
+        </button>
+    </mat-card>
+</div>

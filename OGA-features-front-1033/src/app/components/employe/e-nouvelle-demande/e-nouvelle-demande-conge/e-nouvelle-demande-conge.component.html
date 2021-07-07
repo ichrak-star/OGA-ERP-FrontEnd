@@ -1,0 +1,32 @@
+<div class="container">
+
+    <mat-form-field appearance="fill" class="example-form-field" style="width: 100%;">
+        <mat-label>Enter la période de congé</mat-label>
+        <mat-date-range-input [rangePicker]="rangePicker">
+          <input [(ngModel)]="dateDebut" matStartDate placeholder="Date début">
+          <input [(ngModel)]="dateFin" matEndDate placeholder="Date fin">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker touchUi #rangePicker>
+          <mat-date-range-picker-actions>
+            <button mat-button matDateRangePickerCancel>Annuler</button>
+            <button mat-raised-button color="primary" matDateRangePickerApply>Valider</button>
+          </mat-date-range-picker-actions>
+        </mat-date-range-picker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Raison</mat-label>
+        <textarea matInput [(ngModel)]="raison" matInput></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Commentaire</mat-label>
+        <textarea matInput [(ngModel)]="commentaire" matInput></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)='creerDemande()'>
+        Créer
+    </button>
+
+</div>

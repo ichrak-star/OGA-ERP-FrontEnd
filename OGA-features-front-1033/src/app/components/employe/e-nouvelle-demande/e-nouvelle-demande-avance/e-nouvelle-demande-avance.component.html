@@ -1,0 +1,22 @@
+<div class="container">
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Montant *</mat-label>
+        <input [(ngModel)]="montant" matInput type="number" min="50" step="5">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Raison</mat-label>
+        <textarea [(ngModel)]="raison" matInput></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Commentaire</mat-label>
+        <textarea [(ngModel)]="commentaire" matInput></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)='creerDemande()'>
+        Créer
+    </button>
+
+</div>

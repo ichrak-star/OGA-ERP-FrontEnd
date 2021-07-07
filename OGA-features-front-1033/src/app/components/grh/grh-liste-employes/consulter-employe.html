@@ -1,0 +1,98 @@
+<mat-dialog-content>
+    <div class="header">
+        <img *ngIf="!data.profileImage" src='../../../../assets/default_profile.png' class="empImage" />
+        <img *ngIf="data.profileImage" src={{data.profileImage}} class="empImage" />
+        <div>
+            <h2>{{data.prenom}} {{data.nom}}</h2>
+            <p> {{data.role}} en {{data.departement}} </p>
+            <mat-icon style="font-size: 20px; margin-top: 2px;" *ngIf="data.sex == 'Male' ">male</mat-icon>
+            <mat-icon style="font-size: 20px;" *ngIf="data.sex !== 'Male' ">female</mat-icon>
+        </div>
+        <mat-icon
+        *ngIf="!data.disabled" 
+            style="
+            color: red;
+            flex-grow: 3;
+            text-align: right;
+            cursor: pointer;
+            margin-top: 5px;
+            "
+        (click) = 'disableEmploye()'
+        >
+            delete_outline
+        </mat-icon>
+    </div>
+
+    <hr style="border-color: rgba(174, 175, 175, 0.068);"/>
+
+
+    <mat-form-field appearance="fill" style="width: 100%; margin-top: 10px;">
+        <mat-label>Preom</mat-label>
+        <input matInput [(ngModel)]="data.prenom" >
+        <mat-icon matPrefix>face</mat-icon>
+    </mat-form-field>
+
+    <br/>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Nom</mat-label>
+        <input matInput [(ngModel)]="data.nom" >
+        <mat-icon matPrefix>face</mat-icon>
+    </mat-form-field>
+
+    <br/>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Téléphone</mat-label>
+        <input matInput [(ngModel)]="data.telephone" type="number" >
+        <mat-icon matPrefix>call</mat-icon>
+    </mat-form-field>
+
+    <br/>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="data.email" >
+        <mat-icon matPrefix>email</mat-icon>
+    </mat-form-field>
+
+    <br/>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Mot de pass</mat-label>
+        <input [(ngModel)]="data.password" matInput [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+
+
+
+    <div *ngIf="updateCinHidden" style="text-align: center;">
+        <h3 style="margin: 0%;">CIN de l'employé</h3>
+        <img 
+            src = {{data.image}} 
+            style="width: 400px; height: 195px; margin: 25px;"
+        >
+        <br/>
+        <button mat-button style="color: cadetblue;" (click)='showUpdateCin()'>Changer l'image de cin</button>
+    </div>
+    <div style="text-align: center;" *ngIf="!updateCinHidden" >
+        <h3>Ajouter la nouvelle image de cin</h3>
+        <img *ngIf="cinUrl" style="width: 400px; height: 195px; margin: 25px;" [src]="cinUrl">
+        <p>
+            <input type="file" (change)='onFileSelected($event)' accept="image/*"/>
+        </p>
+        <div style="display: flex; justify-content: space-between; width: 40%; margin-left: 30%; margin-top: 10px;">
+            <button mat-button mat-button color='primary' (click)='updateCin()' >Changer</button>
+            <button mat-button mat-button style="color: cadetblue;" (click)='showUpdateCin()' >Annuler</button>
+        </div>
+        
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button color='primary' (click)='updateEmploye()' >Modifier</button>
+    <button mat-button mat-dialog-close>Fermer</button>
+</mat-dialog-actions>
